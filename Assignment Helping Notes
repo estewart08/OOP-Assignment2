@@ -1,0 +1,38 @@
+Comparable<T> / Comparator<T> is an interface
+
+Superclasses begin Slide 23 -
+
+Movie extends Product, etc.
+super.method() to call method of Superclass
+
+Slide 27 good notes on invoking Superclass methods
+
+Constructor of Superclass is automatically constructed when subclass constructor is called.
+
+Movie m = new Movie(pass in data);
+
+CONSTRUCTORS
+Movie() {}
+Movie(sku, price, quantity, title) {
+	super(sku, price, quantity, title);
+}
+Movie(upc, sku, price, quantity, title) {
+	this(sku, price, quantity, title);
+	this.upc = upc;
+}
+
+Product() {}
+Product(){
+	this.sku = sku;
+	this.price = price;
+	etc.
+}
+Each subclass may have its own display.
+
+
+http://stackoverflow.com/questions/12766623/error-adding-subclass-item-to-arraylist-of-superclass
+
+To do:
+
+Fix issues from Assignment1 Returned
+
