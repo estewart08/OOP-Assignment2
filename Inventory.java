@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class Inventory implements Serializable{
 	
-	public ArrayList<Movie> inventory = new ArrayList<Movie>();
+	public ArrayList<Product> inventory = new ArrayList<Product>();
 	/**
 	 * Creates an inventory array from a file. If no file exists then
 	 * the array is empty
@@ -20,10 +20,10 @@ public class Inventory implements Serializable{
             FileInputStream fis = new FileInputStream("InventoryFile");
             ObjectInputStream ois = new ObjectInputStream(fis);
 
-            ArrayList<Movie> movies =
-                  (ArrayList<Movie>)ois.readObject();  // explicit cast reqd
+            ArrayList<Product> products =
+                  (ArrayList<Product>)ois.readObject();  // explicit cast reqd
             fis.close();
-            this.inventory = movies;
+            this.inventory = products;
         } catch (FileNotFoundException e) {
             System.out.println("Cannot find datafile.");
         } catch (IOException e)  {
@@ -38,18 +38,18 @@ public class Inventory implements Serializable{
 	 * Adds movie to the array.Also checks for duplicate
 	 * @param e The movie to add
 	 */
-	public void add(Movie e) {
+	public void add(Product p) {
 		int index = -1; //numeric value that updates if sku is found,
 			//index = -1 means index not found
 		
-		for (Movie m : inventory) {
-			if (m.getSku() == e.getSku()) {
-				index = inventory.indexOf(m);
+		for (Product s : inventory) {
+			if (s.getSku() == p.getSku()) {
+				index = inventory.indexOf(s);
 				break;
 			}
 		}
 		if (index == -1)
-			inventory.add(e);
+			inventory.add(p);
 		else
 			System.out.println("A movie with that SKU already exists.");
 	}
@@ -61,9 +61,9 @@ public class Inventory implements Serializable{
 		int index = -1;//numeric value that updates if sku is found, 
 		//index = -1 means index not found
 		
-		for (Movie m : inventory) {
-			if (m.getSku() == sku) {
-				index = inventory.indexOf(m);
+		for (Product p : inventory) {
+			if (p.getSku() == sku) {
+				index = inventory.indexOf(p);
 				break;
 			}
 		}
@@ -80,9 +80,9 @@ public class Inventory implements Serializable{
 	 * @param sku The sku to search for.
 	 */
 	public void displayInfo(int sku) {
-		for (Movie m : inventory) {
-			if (m.getSku() == sku) {
-				m.display();
+		for (Product p : inventory) {
+			if (p.getSku() == sku) {
+				p.display();
 				break;
 			}
 		}	
@@ -92,8 +92,8 @@ public class Inventory implements Serializable{
 	 */
 	public void displayTable() {
 		System.out.println("Inventory Table:\n");
-		for (Movie m : inventory) {
-			m.displayt();
+		for (Product p : inventory) {
+			p.displayt();
 		}
 	}
 	/**
