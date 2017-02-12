@@ -1,4 +1,4 @@
-package assign1Package;
+package assign2Package;
 /**
  * Driver Class that contains a menu for the user to manipulate an
  * inventory ArrayList of products.

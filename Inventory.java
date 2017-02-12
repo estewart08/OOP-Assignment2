@@ -1,8 +1,8 @@
-package assign1Package;
+package assign2Package;
 import java.io.*;
 import java.util.*;
 /**
- * Inventory is an object that holds an array of movies
+ * Inventory is class that holds an array of products
  * @author Dylan Wagner
  * @author Ethan Stewart
  * 
@@ -35,8 +35,8 @@ public class Inventory implements Serializable{
  
 	}
 	/**
-	 * Adds movie to the array.Also checks for duplicate
-	 * @param e The movie to add
+	 * Adds a product to the array. Also checks for duplicates
+	 * @param p The product to add
 	 */
 	public void add(Product p) {
 		int index = -1; //numeric value that updates if sku is found,
@@ -51,10 +51,10 @@ public class Inventory implements Serializable{
 		if (index == -1)
 			inventory.add(p);
 		else
-			System.out.println("A movie with that SKU already exists.");
+			System.out.println("A product with that SKU already exists.");
 	}
 	/**
-	 * Removes movie from array if the sku exists
+	 * Removes product from the array if the sku exists
 	 * @param sku The sku of the movie to be removed
 	 */
 	public void remove(int sku) {
@@ -72,30 +72,76 @@ public class Inventory implements Serializable{
 			System.out.println("No match found in the inventory, sorry.");
 		else {
 			inventory.remove(index);
-			System.out.println("Movie successfully removed from inventory.");
+			System.out.println("Product successfully removed from inventory.");
 		}
 	}
 	/**
-	 * Displays info for a specific movie
+	 * Displays info for a specific product
 	 * @param sku The sku to search for.
 	 */
 	public void displayInfo(int sku) {
 		for (Product p : inventory) {
 			if (p.getSku() == sku) {
-				p.display();
-				break;
+				if (p instanceof Toy){
+					Toy toy = (Toy)p;
+					p.displayInstance(toy);
+				}
+				else if (p instanceof Movie){
+					Movie movie = (Movie)p;
+					p.displayInstance(movie);
+				}
+				
+				else{
+					Book book = (Book)p;
+					p.displayInstance(book);
+				}
 			}
 		}	
+		System.out.println("SKU not found.");
 	}
 	/**
-	 * Displays all of the movies in a table form
+	 * Displays all of the products in order by SKU
 	 */
-	public void displayTable() {
-		System.out.println("Inventory Table:\n");
+	public void displayBySku() {		
+		Comparator<Product> comp = new ProductBySku();
+		Collections.sort(inventory, comp);
 		for (Product p : inventory) {
+			if (p instanceof Toy){
+				System.out.print("Toy\t");
+			}
+			else if (p instanceof Movie){
+				System.out.print("Movie\t");
+			}
+			
+			else{
+				System.out.print("Book\t");
+			}
+			p.displayt();
+		}
+				
+	}
+
+	/**
+	 * Displays all of the products in order by Title
+	 */	
+	public void displayByTitle() {	
+		Comparator<Product> comp = new ProductByTitle();
+		Collections.sort(inventory, comp);
+		for (Product p : inventory) {
+			if (p instanceof Toy){
+				System.out.print("Toy\t");
+			}
+			else if (p instanceof Movie){
+				System.out.print("Movie\t");
+			}
+			
+			else{
+				System.out.print("Book\t");
+			}					
 			p.displayt();
 		}
 	}
+		
 	/**
 	 * Saves the inventory array to a file so it can be reused.
 	 */

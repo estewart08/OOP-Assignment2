@@ -1,15 +1,22 @@
-package assign1Package;
+package assign2Package;
 import java.util.Scanner;
-
+/**
+ * UserMenu is a class that deals with the menu manipulation and user input
+ * @author Dylan Wagner
+ * @author Ethan Stewart
+ * 
+ */
 public class UserMenu {
 	
 	UserMenu() {}
 	
-	private int userChoice; //numeric value for user input to handle menu and do-while
+	private int userChoice; //numeric value for user input to handle menu 
+							//and do-while
 	private char productCat; //char value for product category case 1 of switch
-	private Scanner input = new Scanner(System.in);
-	private Inventory products = new Inventory();
+	private Scanner input = new Scanner(System.in);//scanner
+	private Inventory products = new Inventory();//instance of products
 	
+	int valid;//flag for validation loop
 	int sku;   //numeric value for SKU input
 	String title;  //String value for title input
 	float price; //float value for price of product input
@@ -19,9 +26,17 @@ public class UserMenu {
 	String author; //String value for Book author input
 	int weight; //numeric value for Toy weight input
 	
+	
+	/**
+	 * Gets input from user for menu choice. Validates number is correct
+	 * @return Returns user number as int
+	 */
+	
 	public int getNumericMenuOption() {
-
-		System.out.println("What can I help you with?\n");
+		
+		valid = 0;
+		do{
+		System.out.println("Online Store Inventory Menu\n");
 		System.out.println("1. Add product ");
 		System.out.println("2. Remove product ");
 		System.out.println("3. Find product by sku ");
@@ -29,9 +44,34 @@ public class UserMenu {
 		System.out.println("5. Display inventory sorted by title ");
 		System.out.println("6. Process a sale ");
 		System.out.println("7. Quit the program ");
-
-		return userChoice = input.nextInt();
+		
+		System.out.println("\nEnter your choice:");
+		if(input.hasNextInt()){
+			userChoice = input.nextInt();
+			if(userChoice <1 || userChoice > 8){
+				System.out.println("Please enter a number from 1-8");
+				valid = 0;
+			}
+			if(userChoice >=1 && userChoice < 8)
+				valid = 1;
+			
+		}
+		else{
+			System.out.println("Please enter a number from 1-8");
+			valid = 0;
+			input.next();
+			
+		}
+		
+		}while(valid!=1);
+	
+		return userChoice;//= input.nextInt();
 	}
+	
+	/**
+	 * Chooses correct menu option based on user input
+	 */
+	
 	
 	public void handleUserChoice() {
 		switch (this.userChoice)
@@ -67,10 +107,14 @@ public class UserMenu {
 				break;
 			
 			case 4:
-				products.displayTable();
+				products.displayBySku();
+				break;
+			
+			case 5:
+				products.displayByTitle();
 				break;
 				
-			case 5:
+			case 7:
 				products.save();
 				break;
 				
@@ -78,6 +122,10 @@ public class UserMenu {
 				System.out.println("Invalid menu option.");
 		}
 	}
+	
+	/**
+	 * Gets input for sku, title, price, quantity, upc for a movie object
+	 */
 	
 	private void addMovie() {
 		input.nextLine();
@@ -97,6 +145,9 @@ public class UserMenu {
 			quantity, upc));
 	}
 	
+	/**
+	 * Gets input for sku, title, price, quantity, author for a book object
+	 */
 	private void addBook() {
 		input.nextLine();
 		System.out.println("Enter the SKU: ");
@@ -117,6 +168,9 @@ public class UserMenu {
 			quantity, isbn, author));
 	}
 	
+	/**
+	 * Gets input for sku, title, price, quantity, weight for a toy object
+	 */
 	private void addToy() {
 		input.nextLine();
 		System.out.println("Enter the SKU: ");

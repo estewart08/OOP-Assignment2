@@ -1,14 +1,15 @@
-package assign1Package;
+package assign2Package;
 import java.text.*;
 import java.io.*;
 /**
  * A Product is an object that contains information about that product.
- * Such as product sku, title, price and quantity of that product.
+ * Such as product sku, title, price, quantity of that product. Also contains
+ * specific variables for each product. move-upc, book-author,isbn toy-weight
  * @author Dylan Wagner
  * @author Ethan Stewart
  *
  */
-public class Product implements Serializable{
+public class Product implements Comparable<Product>, Serializable{
 
 	private int sku;//numeric value for the sku
 	private String title;//string value for the product title
@@ -19,26 +20,40 @@ public class Product implements Serializable{
 
 	Product() {}
 	
+	/**
+	 * Constructor for Product
+	 */	
+	
 	Product(int sku, String title, float price, int quantity) {
 		this.sku = sku;
 		this.title = title;
 		this.price = price;
 		this.quantity = quantity;
 	}
+
+	/**
+	 * Formatting for sorting by title
+	 */		
+	public int compareTo(Product rhs){
+		return title.compareTo(rhs.title);
+	}
+	
 	
 	/**
-	 * Format for displaying a single movie
+	 * Format for displaying a single product
 	 */
 	public void display() {
 		System.out.println("Title: " + title);
 		System.out.println("SKU: " + sku);
 		System.out.println("Price: " + priceFormat.format(price));
-		System.out.println("Quantity: " + quantity);
-		System.out.println();
+		System.out.println("Quantity: " + quantity);		
+	}
+	public void displayInstance(Product p){
+		p.display();
 	}
 	
 	/**
-	 * Format for displaying the table of movies
+	 * Format for displaying the table of products
 	 */
 	public void displayt(){
 		System.out.println(sku + "\t" + quantity + "\t" + 
@@ -52,5 +67,13 @@ public class Product implements Serializable{
 	public int getSku() {
 		return this.sku;
 	}
-	
+	/**
+	 * Getter for the title of the Product
+	 * @return Returns the title as string
+	 */	
+
+	public String getTitle() {
+		return this.title;
+	}
+
 }
