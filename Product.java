@@ -38,7 +38,9 @@ public class Product implements Comparable<Product>, Serializable{
 		return title.compareTo(rhs.title);
 	}
 	
-	
+	public void displayType(){
+		System.out.println("Product\n");
+	}
 	/**
 	 * Format for displaying a single product
 	 */
@@ -55,7 +57,7 @@ public class Product implements Comparable<Product>, Serializable{
 	/**
 	 * Format for displaying the table of products
 	 */
-	public void displayt(){
+	public void displaytable(){
 		System.out.println(sku + "\t" + quantity + "\t" + 
 	    priceFormat.format(price)+ "\t" + title);
 	}

@@ -33,5 +33,11 @@ public class Movie extends Product {
 		System.out.println();
 	}
 	
-	
+	//public void updateQuantity(int userQuan){
+//		Product(int userQUan)
+//	}
+
+	public void displayType(){
+		System.out.print("Movie\t");
+	}
 }

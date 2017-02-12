@@ -35,5 +35,7 @@ public class Toy extends Product {
 		System.out.println("Weight: " + weight);
 		System.out.println();
 	}
-	
+	public void displayType(){
+		System.out.print("Toy\t");
+	}
 }

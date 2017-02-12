@@ -80,24 +80,16 @@ public class Inventory implements Serializable{
 	 * @param sku The sku to search for.
 	 */
 	public void displayInfo(int sku) {
+		int found = 0;
 		for (Product p : inventory) {
-			if (p.getSku() == sku) {
-				if (p instanceof Toy){
-					Toy toy = (Toy)p;
-					p.displayInstance(toy);
-				}
-				else if (p instanceof Movie){
-					Movie movie = (Movie)p;
-					p.displayInstance(movie);
-				}
-				
-				else{
-					Book book = (Book)p;
-					p.displayInstance(book);
-				}
+			if (p.getSku()==sku){
+				p.display();
+				found = 1;
 			}
+			
 		}	
-		System.out.println("SKU not found.");
+		if(found == 0)
+			System.out.println("SKU not found.");
 	}
 	/**
 	 * Displays all of the products in order by SKU
@@ -106,17 +98,8 @@ public class Inventory implements Serializable{
 		Comparator<Product> comp = new ProductBySku();
 		Collections.sort(inventory, comp);
 		for (Product p : inventory) {
-			if (p instanceof Toy){
-				System.out.print("Toy\t");
-			}
-			else if (p instanceof Movie){
-				System.out.print("Movie\t");
-			}
-			
-			else{
-				System.out.print("Book\t");
-			}
-			p.displayt();
+			p.displayType();
+			p.displaytable();
 		}
 				
 	}
@@ -128,17 +111,8 @@ public class Inventory implements Serializable{
 		Comparator<Product> comp = new ProductByTitle();
 		Collections.sort(inventory, comp);
 		for (Product p : inventory) {
-			if (p instanceof Toy){
-				System.out.print("Toy\t");
-			}
-			else if (p instanceof Movie){
-				System.out.print("Movie\t");
-			}
-			
-			else{
-				System.out.print("Book\t");
-			}					
-			p.displayt();
+			p.displayType();	
+			p.displaytable();
 		}
 	}
 		
@@ -158,7 +132,13 @@ public class Inventory implements Serializable{
 		
 	}
 	
-	
+//	public void processSale(int sku, int userQuantity){		
+//		for (Product p : inventory) {
+	//		if (p.getSku() == sku) {
+
+	//			}
+	//		}
+	//	}	
+
+
 }
-
-

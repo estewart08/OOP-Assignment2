@@ -36,6 +36,8 @@ public class Book extends Product {
 		System.out.println("ISBN: " + isbn);
 		System.out.println();
 	}
-	
+	public void displayType(){
+		System.out.print("Book\t");
+	}
 
 }

@@ -16,6 +16,7 @@ public class UserMenu {
 	private Scanner input = new Scanner(System.in);//scanner
 	private Inventory products = new Inventory();//instance of products
 	
+	int shipping;//stores numeric value for shipping costs
 	int valid;//flag for validation loop
 	int sku;   //numeric value for SKU input
 	String title;  //String value for title input
@@ -114,6 +115,14 @@ public class UserMenu {
 				products.displayByTitle();
 				break;
 				
+			case 6: 
+				System.out.println("Enter the SKU of sold items: ");
+				sku = input.nextInt();
+				System.out.println("Enter the quantity of sold items: ");
+				quantity = input.nextInt();
+				System.out.println("Enter the cost of shipping: ");
+				shipping = input.nextInt();
+				
 			case 7:
 				products.save();
 				break;
@@ -162,6 +171,7 @@ public class UserMenu {
 		System.out.println("Enter the ISBN: ");
 		isbn = input.nextInt();
 		System.out.println("Enter the author: ");
+		input.nextLine();
 		author = input.nextLine();
 		
 		products.add(new Book(sku, title, price, 
